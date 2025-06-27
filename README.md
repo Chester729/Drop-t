@@ -1,15 +1,21 @@
 # Drop-t
 algorithm code for Drop-t
 
-Run the code to obtain d-LHCC from Drop-t sequencing data.
-pipeline:
-raw sequencing reads
+
+Before running these codes, you need to get all fragments and contacts in each droplet(barcode). 
+
+Detailed pipeline can be find in Methods and Supplementary methods.
+
+From raw sequencing reads,
+
 use longranger to get barcoded reads
-use fastp filt quality
+
+use fastp filter low quality reads and adapters
+
 use juicer get merged_nodups.txt
-use merged_nodups to get bc_contacts
-bc_contacts > bc_contacts_sorted
-from bc_contacts_sorted get all bc fragments, bc_contacts
+
+from merged_nodups.txt get the bc_frags and bc_contacts
+
 
 Required files
 
@@ -23,6 +29,7 @@ bc2  frag21  frag22  frag23  ...
 
 ...
 
+
 bc_contacts: all contacts between fragments in each droplet
 
 format: (See file examples/contacts_10000.txt)
@@ -33,9 +40,13 @@ bc2  (frag111,frag212):weight  (frag221,frag222):weight  ...
 
 ...
 
+
 MboI.txt: genomic coordinates of all MboI (or other enzyme) restriction site 
 This can be obtained from juicer.
 
-codes:
-make_weighted_graph.py: from bc_frags and bc_contacts create a weighted graph
 
+codes:
+
+To find the order of running these codes, check "example_codes.sh". 
+
+To find what each code does, check example_codes.sh and the .py files.
